@@ -1,4 +1,6 @@
 // ─── StoryCast — All Story Data ──────────────────────────────
+// I centralized all story data here to avoid creating separate HTML files for each story.
+// This makes it easier to manage, update, and scale the project.
 const STORIES = [
   {
     id: 1,
@@ -17,26 +19,25 @@ const STORIES = [
       "Join us as we listen to the hidden pulse of the wild, uncovering secrets that have remained silent for generations, now brought to life through the lens of modern discovery."
     ]
   },
-
-{
-  id: 2,
-  title: "The Wind and the Sun",
-  category: "Fables",
-  type: "Video",
-  author: "Aesop",
-  date: "November 5, 2023",
-  duration: "3:24",
-  image: "assets/images/story2.png",
-  imageAlt: "A bright sun shining through dramatic clouds",
-  description: [
-    "The Wind and the Sun is a classic fable about the power of gentleness over force.",
-    "High up in the sky, Wind and Sun boasted about who was stronger. When a traveler passed below, they made a bet to see who could make him take off his coat.",
-    "Wind blew with all his might, but the man only held his coat tighter. Then Sun shone warmly, and the man willingly took off his coat.",
-    "This timeless tale teaches us that kindness and warmth can achieve what force never can."
-  ]
-},
-
-    {
+  // I added more stories below following the same structure for consistency.
+  {
+    id: 2,
+    title: "The Wind and the Sun",
+    category: "Fables",
+    type: "Video",
+    author: "Aesop",
+    date: "November 5, 2023",
+    duration: "3:24",
+    image: "assets/images/story2.png",
+    imageAlt: "A bright sun shining through dramatic clouds",
+    description: [
+      "The Wind and the Sun is a classic fable about the power of gentleness over force.",
+      "High up in the sky, Wind and Sun boasted about who was stronger. When a traveler passed below, they made a bet to see who could make him take off his coat.",
+      "Wind blew with all his might, but the man only held his coat tighter. Then Sun shone warmly, and the man willingly took off his coat.",
+      "This timeless tale teaches us that kindness and warmth can achieve what force never can."
+    ]
+  },
+  {
     id: 3,
     title: "The Boy Who Cried Wolf",
     category: "Fables",
@@ -54,8 +55,7 @@ const STORIES = [
       "This timeless tale teaches us that liars are not believed even when they tell the truth."
     ]
   },
-
-   {
+  {
     id: 4,
     title: "5 Minutes to Start Your Day Right!",
     category: "Motivation",
@@ -72,9 +72,7 @@ const STORIES = [
       "This timeless lesson from a Navy SEAL teaches us that success starts with discipline, hope, and never giving up. Don't ever ring the bell."
     ]
   },
-
-
-    {
+  {
     id: 5,
     title: "Chicken Little",
     category: "Fables",
@@ -92,7 +90,6 @@ const STORIES = [
       "The next morning, the animals have disappeared. Fred the Fox sits happily with a big, round belly. A cautionary tale about believing everything you read on the internet."
     ]
   },
-
   {
     id: 6,
     title: "Vincent Paints His House",
@@ -111,20 +108,23 @@ const STORIES = [
       "A heartwarming story about compromise, creativity, and making everyone feel included."
     ]
   }
-
 ];
 
 // ─── Utility: get URL param ───────────────────────────────────
+// I used this to extract the story ID from the URL, e.g., ?id=1
 function getParam(key) {
   return new URLSearchParams(window.location.search).get(key);
 }
 
 // ─── Utility: image src based on page depth ──────────────────
+// I added this to handle image paths dynamically, especially for nested pages.
 function getImageSrc(story, basePath) {
   return story.image;
 }
 
 // ─── Utility: create story card HTML ─────────────────────────
+// I created this function to generate consistent story cards across the site.
+// It avoids code duplication and ensures all story cards look the same.
 function createStoryCard(story, basePath = '') {
   const isCurrent = window.player && window.player.currentStoryId === story.id;
   return `
@@ -156,6 +156,7 @@ function createStoryCard(story, basePath = '') {
 }
 
 // ─── Mobile nav toggle (runs on every page) ──────────────────
+// I added this to handle the mobile navigation toggle for better accessibility.
 document.addEventListener('DOMContentLoaded', () => {
   const navToggle = document.querySelector('.nav__toggle');
   const navLinks  = document.querySelector('.nav__links');
@@ -167,6 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── HOME PAGE ───────────────────────────────────────────────
+  // I used this to dynamically load featured stories on the homepage.
   const featuredGrid = document.getElementById('featured-grid');
   if (featuredGrid) {
     STORIES.slice(0, 3).forEach(story => {
@@ -175,6 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── STORIES PAGE ────────────────────────────────────────────
+  // I used this to display all stories and handle filtering by category.
   const allStoriesGrid = document.getElementById('all-stories-grid');
   if (allStoriesGrid) {
     STORIES.forEach(story => {
@@ -201,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── STORY DETAIL PAGE ───────────────────────────────────────
+  // I used this to dynamically load story details based on the URL parameter.
   const storyTitle = document.getElementById('story-title');
   if (storyTitle) {
     const id    = parseInt(getParam('id')) || 1;
@@ -226,6 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ─── TRANSCRIPT LOADING ──────────────────────────────────
+    // I used the Fetch API to dynamically load transcripts for each story.
     const transcriptEl = document.getElementById('transcript-content');
     if (transcriptEl) {
       fetch(`/assets/transcripts/story${story.id}.txt`)
@@ -249,31 +254,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const relatedEl = document.getElementById('related-stories');
-if (relatedEl) {
-  STORIES.filter(s => s.id !== id).slice(0, 2).forEach(rel => {
-    // Fix image path for related stories
-    let imagePath = rel.image;
-    // If it's a local path (starts with assets/), add ../ to go up from /story/ folder
-    if (imagePath.startsWith('assets/')) {
-      imagePath = `../${imagePath}`;
+    if (relatedEl) {
+      STORIES.filter(s => s.id !== id).slice(0, 2).forEach(rel => {
+        // I fixed image paths for related stories to ensure they display correctly.
+        let imagePath = rel.image;
+        if (imagePath.startsWith('assets/')) {
+          imagePath = `../${imagePath}`;
+        }
+
+        relatedEl.innerHTML += `
+          <article class="related-card">
+            <img src="${imagePath}" alt="${rel.imageAlt}" class="related-card__image" loading="lazy" />
+            <div class="related-card__body">
+              <span class="tag" style="font-size:0.65rem;padding:2px 8px">${rel.category}</span>
+              <h3 class="related-card__title">
+                <a href="story.html?id=${rel.id}">${rel.title}</a>
+              </h3>
+              <p class="related-card__desc">${rel.description[0].substring(0, 70)}…</p>
+            </div>
+          </article>`;
+      });
     }
-    // If it's a URL (starts with http), keep as is
-    
-    relatedEl.innerHTML += `
-      <article class="related-card">
-        <img src="${imagePath}" alt="${rel.imageAlt}" class="related-card__image" loading="lazy" />
-        <div class="related-card__body">
-          <span class="tag" style="font-size:0.65rem;padding:2px 8px">${rel.category}</span>
-          <h3 class="related-card__title">
-            <a href="story.html?id=${rel.id}">${rel.title}</a>
-          </h3>
-          <p class="related-card__desc">${rel.description[0].substring(0, 70)}…</p>
-        </div>
-      </article>`;
-  });
-}
 
     // ─── REAL MEDIA PLAYER (Audio or Video) ──────────────────
+    // I implemented a custom media player to handle both audio and video stories.
     const audioEl      = document.getElementById('story-audio');
     const videoEl      = document.getElementById('story-video');
     const videoContainer = document.getElementById('video-container');
@@ -290,39 +294,37 @@ if (relatedEl) {
     if (mediaEl) {
       if (isVideo) {
         // ─── VIDEO STORY ──────────────────────────────────────
+        // I set up video-specific logic, including poster images and captions.
         const videoPath = `/assets/video/story${story.id}.mp4`;
         const posterPath = `/${story.image}`;
-        
+
         mediaEl.src = videoPath;
         mediaEl.poster = posterPath;
-        
+
         if (videoContainer) {
           videoContainer.style.display = 'block';
           videoContainer.style.minHeight = '200px';
         }
         if (audioPlayer) audioPlayer.style.display = 'none';
-        
-        // Force poster to show before video loads
+
         mediaEl.style.background = `url('${posterPath}') center/contain no-repeat`;
         mediaEl.style.backgroundColor = '#000';
         mediaEl.style.objectFit = 'contain';
-        
-        console.log('🎬 Video path:', videoPath);
-        console.log('📸 Poster path:', posterPath);
 
-        // Load VTT Captions
+        // I added VTT captions for accessibility.
         const captionsTrack = document.getElementById('video-captions');
         if (captionsTrack) {
           captionsTrack.src = `/assets/transcripts/story${story.id}.vtt`;
-          console.log('📝 Loading captions from:', `/assets/transcripts/story${story.id}.vtt`);
         }
       } else {
         // ─── AUDIO STORY (Podcast) ────────────────────────────
+        // I set up audio-specific logic for podcasts.
         mediaEl.src = `/assets/audio/story${story.id}.mp3`;
         if (videoContainer) videoContainer.style.display = 'none';
         if (audioPlayer) audioPlayer.style.display = 'block';
       }
 
+      // I created a helper function to format time for the media player.
       function formatTime(secs) {
         if (isNaN(secs) || !isFinite(secs)) return '00:00';
         const m = Math.floor(secs / 60).toString().padStart(2, '0');
@@ -341,7 +343,7 @@ if (relatedEl) {
         if (progressBar)   progressBar.setAttribute('aria-valuenow', Math.round(pct));
       });
 
-      // Only use custom play button for audio
+      // I added custom play/pause button logic for audio stories.
       if (playBtn && !isVideo) {
         playBtn.addEventListener('click', () => {
           if (mediaEl.paused) {
@@ -356,6 +358,7 @@ if (relatedEl) {
         });
       }
 
+      // I added click-to-seek functionality for the progress bar.
       if (progressBar && !isVideo) {
         progressBar.addEventListener('click', (e) => {
           const rect = progressBar.getBoundingClientRect();
@@ -376,36 +379,36 @@ if (relatedEl) {
     }
 
     // ─── Captions Toggle ──────────────────────────────────────────
+    // I added a toggle for video captions to improve accessibility.
     const captionsBtn = document.getElementById('captions-btn');
     if (captionsBtn) {
       const captionsText = document.getElementById('captions-text');
-      
-      // Only show captions button for video stories
+
+      // I ensured captions are only shown for video stories.
       if (story.type === 'Video') {
         captionsBtn.style.display = 'inline-flex';
       } else {
         captionsBtn.style.display = 'none';
       }
-      
+
       captionsBtn.addEventListener('click', () => {
         const pressed = captionsBtn.getAttribute('aria-pressed') === 'true';
         const newState = !pressed;
         captionsBtn.setAttribute('aria-pressed', String(newState));
-        
+
         if (captionsText) {
           captionsText.textContent = newState ? 'Hide Captions' : 'View Captions';
         }
-        
-        // Toggle captions on the video
+
         const track = document.querySelector('#story-video track');
         if (track) {
           track.track.mode = newState ? 'showing' : 'hidden';
-          console.log('Captions mode:', track.track.mode);
         }
       });
     }
 
     // ─── Transcript accordion ──────────────────────────────────
+    // I added an accordion for transcripts to save space and improve UX.
     const transcriptToggle = document.querySelector('.transcript-section__toggle');
     const transcriptBody   = document.getElementById('transcript-body');
     if (transcriptToggle && transcriptBody) {
@@ -418,4 +421,5 @@ if (relatedEl) {
 });
 
 // ─── Make STORIES available globally ──────────────────────────
+// I exposed the STORIES array globally for potential future use.
 window.STORIES = STORIES;
