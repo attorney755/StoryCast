@@ -140,7 +140,7 @@ function createStoryCard(story, basePath = '') {
       </a>
       <div class="story-card__body">
         <div class="story-card__meta">
-          <span class="tag">${story.type}</span>
+          <span class="tag">${story.category} · ${story.type}</span>
           <span class="story-card__duration">${story.duration}</span>
         </div>
         <h3 class="story-card__title">
