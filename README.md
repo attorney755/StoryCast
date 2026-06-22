@@ -1,7 +1,12 @@
-```markdown
 # StoryCast
 
 An accessible audio and video storytelling microsite built with semantic HTML5, Sass, and vanilla JavaScript.
+
+---
+
+## Project Overview
+
+StoryCast is a microsite designed to showcase audio and video stories with a focus on accessibility, dynamic content loading, and a clean, maintainable codebase. The project leverages modern web technologies to provide a seamless experience for users and developers alike.
 
 ---
 
@@ -11,7 +16,7 @@ An accessible audio and video storytelling microsite built with semantic HTML5, 
 StoryCast/
 ├── index.html                  # Home page
 ├── stories.html                # All stories listing page
-├── about.html                  # About & Access page
+├── about.html                  # About & Accessibility page
 ├── story/
 │   └── story.html              # Story detail page (JS-driven via ?id=1–6)
 ├── sass/
@@ -38,17 +43,17 @@ StoryCast/
 
 ## How to Run Locally
 
-### Option 1 — VS Code Live Server (Recommended)
+### Option 1: VS Code Live Server (Recommended)
 
-This is the best way to run the project. It starts a local server so all features work correctly including transcripts, audio, and video.
+The easiest way to run the project. It starts a local server so all features, including transcripts, audio, and video, work correctly.
 
-1. Open the `StoryCast` folder in VS Code
-2. Install the **Live Server** extension by Ritwick Dey (if not already installed)
-3. Right-click `index.html` in the file explorer
-4. Click **Open with Live Server**
-5. The site will open at `http://127.0.0.1:5500`
+1. Open the `StoryCast` folder in VS Code.
+2. Install the **Live Server** extension by Ritwick Dey (if not already installed).
+3. Right-click `index.html` in the file explorer.
+4. Click **Open with Live Server**.
+5. The site will open at `http://127.0.0.1:5500`.
 
-### Option 2 — Python Local Server
+### Option 2: Python Local Server
 
 If you have Python installed, open your terminal inside the `StoryCast` folder and run:
 
@@ -57,9 +62,9 @@ If you have Python installed, open your terminal inside the `StoryCast` folder a
 python -m http.server 5500
 ```
 
-Then open your browser and go to `http://localhost:5500`
+Then open your browser and go to `http://localhost:5500`.
 
-### Option 3 — Node.js Local Server
+### Option 3: Node.js Local Server
 
 If you have Node.js installed:
 
@@ -71,15 +76,17 @@ Then follow the URL shown in the terminal.
 
 ---
 
-## Why You Cannot Just Double-Click index.html
+## Why You Need a Local Server
 
 Opening HTML files directly from your file system uses the `file://` protocol. Several features will not work under `file://`:
 
-| Feature | Why it breaks without a server |
-|---|---|
-| **Transcripts** | The `fetch()` call that loads `.txt` files is blocked by browser security (CORS policy) on `file://` |
-| **Audio/Video playback** | Some browsers block media autoload and seeking on `file://` |
-| **Story navigation** | URL parameters like `?id=1` may not be read correctly on `file://` |
+
+| Feature                  | Why it breaks without a server                                                                       |
+| ------------------------ | ---------------------------------------------------------------------------------------------------- |
+| **Transcripts**          | The `fetch()` call that loads `.txt` files is blocked by browser security (CORS policy) on `file://` |
+| **Audio/Video playback** | Some browsers block media autoload and seeking on `file://`                                          |
+| **Story navigation**     | URL parameters like `?id=1` may not be read correctly on `file://`                                   |
+
 
 **Always use a local server (Live Server, Python, or Node) when testing this project.**
 
@@ -112,100 +119,67 @@ sass --watch sass/main.scss css/main.css
 ## Adding Media Files
 
 ### Audio (Podcasts)
-- Format: MP3
-- Location: `assets/audio/`
-- Naming: `story1.mp3`, `story2.mp3` ... `story6.mp3`
-- Duration: approximately 3-5 minutes each
+
+- **Format:** MP3
+- **Location:** `assets/audio/`
+- **Naming:** `story1.mp3`, `story2.mp3` ... `story6.mp3`
+- **Duration:** Approximately 3-5 minutes each
 
 ### Video
-- Format: MP4
-- Location: `assets/video/`
-- Naming: `story2.mp4`, `story5.mp4` (video stories only)
-- Duration: approximately 3-5 minutes each
-- Includes VTT captions: `story2.vtt`, `story5.vtt` in `assets/transcripts/`
+
+- **Format:** MP4
+- **Location:** `assets/video/`
+- **Naming:** `story2.mp4`, `story5.mp4` (video stories only)
+- **Duration:** Approximately 3-5 minutes each
+- **Captions:** VTT files (`story2.vtt`, `story5.vtt`) in `assets/transcripts/`
 
 ### Transcripts
-- Format: Plain text (.txt) for display and download
-- Location: `assets/transcripts/`
-- Naming: `story1.txt`, `story2.txt` ... `story6.txt`
-- These are fetched automatically by the story detail page based on story ID
+
+- **Format:** Plain text (`.txt`) for display and download
+- **Location:** `assets/transcripts/`
+- **Naming:** `story1.txt`, `story2.txt` ... `story6.txt`
+- **Usage:** Fetched automatically by the story detail page based on story ID
 
 ### Captions (Video Only)
-- Format: WebVTT (.vtt) with manual timestamps
-- Location: `assets/transcripts/`
-- Naming: `story2.vtt`, `story5.vtt`
-- Loaded via HTML5 `<track>` element in the video player
-- Timestamps are manually synced to match the audio of each video
+
+- **Format:** WebVTT (`.vtt`) with manual timestamps
+- **Location:** `assets/transcripts/`
+- **Naming:** `story2.vtt`, `story5.vtt`
+- **Usage:** Loaded via HTML5 `<track>` element in the video player
+- **Note:** Timestamps are manually synced to match the audio of each video
 
 ---
 
 ## Adding or Editing Stories
 
-All story data lives in one place: `js/app.js` at the top of the file inside the `STORIES` array. Instead of creating individual HTML files for each story, we use a single `story/story.html` page that dynamically loads content based on the `?id=` URL parameter.
+All story data is centralized in `js/app.js` at the top of the file inside the `STORIES` array. The project uses a single `story/story.html` page that dynamically loads content based on the `?id=` URL parameter.
 
-### Why We Used JavaScript
+### Why JavaScript Was Used
 
-This project was initially intended to be built with only HTML and CSS. However, as the project evolved, we encountered several technical limitations that made JavaScript necessary:
+This project was initially intended to be built with only HTML and CSS. However, as the project evolved, JavaScript became necessary to address several technical limitations:
 
-**1. Dynamic Content Loading**
-- Creating 6 separate HTML files (one for each story) would have led to massive code duplication
-- Every story page would need the same navigation, footer, and player structure repeated 6 times
-- Updating a single element (like the footer) would require editing all 6 files
+1. **Dynamic Content Loading**
+  - Avoids code duplication by using a single template for all stories.
+  - Centralizes story data in one place for easy updates.
+2. **Story Data Management**
+  - All story content (titles, descriptions, authors, dates, media paths) is stored in the `STORIES` array.
+  - Adding a new story only requires adding one object to the array.
+3. **Transcript Loading**
+  - Each story has a transcript stored as a `.txt` file.
+  - JavaScript's `fetch()` API dynamically loads the correct transcript based on the story ID.
+4. **Consistent Rendering**
+  - The same `createStoryCard()` function renders story cards on both the home page and stories page.
+  - Ensures visual consistency across the site.
+5. **Media Player Logic**
+  - Handles switching between audio and video elements based on story type.
+  - Manages play/pause, progress tracking, and captions toggling.
+6. **Filter Functionality**
+  - The stories page includes a filter system (All, Podcasts, Videos).
+  - JavaScript dynamically shows/hides stories based on the selected filter.
 
-**2. Story Data Management**
-- All story content (titles, descriptions, authors, dates, media paths) is centralized in one `STORIES` array
-- Adding a new story only requires adding one object to the array
-- No need to create new HTML files or copy-paste code
+### Story Object Structure
 
-**3. Transcript Loading**
-- Each story has a transcript stored as a `.txt` file
-- JavaScript's `fetch()` API dynamically loads the correct transcript based on the story ID
-- Without JavaScript, we would need to hardcode all transcript content into each HTML file
-
-**4. Consistent Rendering**
-- The same `createStoryCard()` function renders story cards on both the home page and stories page
-- Ensures visual consistency across the site
-- Changes to the card design update everywhere automatically
-
-**5. Media Player Logic**
-- The audio/video player needs to know which file to load based on the story type (Podcast vs Video)
-- JavaScript handles switching between audio and video elements
-- The player also manages play/pause, progress tracking, and captions toggling
-
-**6. Filter Functionality**
-- The stories page has a filter system (All, Podcasts, Videos)
-- JavaScript handles showing/hiding stories based on the selected filter
-
-### The Alternative (Without JavaScript)
-
-If we had avoided JavaScript entirely:
-
-```
-story/
-├── story1.html               # Duplicate code
-├── story2.html               # Duplicate code
-├── story3.html               # Duplicate code
-├── story4.html               # Duplicate code
-├── story5.html               # Duplicate code
-└── story6.html               # Duplicate code
-```
-
-Each file would contain:
-- The same navigation HTML repeated 6 times
-- The same footer HTML repeated 6 times
-- Hardcoded story content (no dynamic loading)
-- No transcript loading (or hardcoded transcripts)
-- No media player logic (audio/video would need separate implementations)
-
-### The Solution
-
-By using JavaScript, we:
-- **Reduced code duplication** by ~80%
-- **Made the site maintainable** — one place to update all stories
-- **Enabled dynamic features** like transcript loading, filtering, and media player controls
-- **Kept the code DRY** (Don't Repeat Yourself)
-
-Each story object looks like this:
+Each story in the `STORIES` array follows this structure:
 
 ```javascript
 {
@@ -225,49 +199,53 @@ Each story object looks like this:
 }
 ```
 
-To add a new story:
-1. Add a new object to the `STORIES` array with a unique `id`
-2. Add the corresponding audio or video file to `assets/`
-3. Add the transcript to `assets/transcripts/` (`.txt` for display, `.vtt` for video captions)
-4. Add the story image to `assets/images/`
+### Steps to Add a New Story
+
+1. Add a new object to the `STORIES` array with a unique `id`.
+2. Add the corresponding audio or video file to `assets/audio/` or `assets/video/`.
+3. Add the transcript to `assets/transcripts/` (`.txt` for display, `.vtt` for video captions).
+4. Add the story image to `assets/images/`.
 
 ---
 
 ## Pages Overview
 
-| Page | File | Description |
-|---|---|---|
-| Home | `index.html` | Hero, 3 featured stories, quote banner |
-| All Stories | `stories.html` | All 6 stories with category filter |
-| Story Detail | `story/story.html` | Dynamic story loaded from `?id=1` to `?id=6` |
-| About & Access | `about.html` | Mission statement and accessibility features |
+
+| Page                  | File               | Description                                  |
+| --------------------- | ------------------ | -------------------------------------------- |
+| Home                  | `index.html`       | Hero, 3 featured stories, quote banner       |
+| All Stories           | `stories.html`     | All 6 stories with category filter           |
+| Story Detail          | `story/story.html` | Dynamic story loaded from `?id=1` to `?id=6` |
+| About & Accessibility | `about.html`       | Mission statement and accessibility features |
+
 
 ---
 
 ## Accessibility Checklist
 
-- [x] Semantic HTML5 throughout (`nav`, `main`, `header`, `footer`, `article`, `section`, `aside`)
-- [x] Skip to main content link on every page
-- [x] Logical heading hierarchy (h1 → h2 → h3) with no skipped levels
-- [x] All images have descriptive `alt` attributes
-- [x] WCAG AA color contrast on all text and background combinations
-- [x] Full keyboard navigation — all elements reachable by Tab key
-- [x] Visible focus states — 3px gold outline on all focusable elements
-- [x] `aria-label` on all icon-only buttons and interactive regions
-- [x] `aria-current="page"` on active navigation links
-- [x] `aria-expanded` on mobile nav toggle and transcript accordion
-- [x] `aria-pressed` on the captions toggle button
-- [x] `aria-live="polite"` on dynamically loaded story grids
-- [x] Full transcripts available for all stories via collapsible section
-- [x] HTML5 `<track>` element for video captions (WebVTT)
-- [x] `@media (prefers-reduced-motion)` disables all transitions
-- [x] `.sr-only` utility class for screen-reader-only labels
+- Semantic HTML5 throughout (`nav`, `main`, `header`, `footer`, `article`, `section`, `aside`)
+- Skip to main content link on every page
+- Logical heading hierarchy (h1 → h2 → h3) with no skipped levels
+- All images have descriptive `alt` attributes
+- WCAG AA color contrast on all text and background combinations
+- Full keyboard navigation — all elements reachable by Tab key
+- Visible focus states — 3px gold outline on all focusable elements
+- `aria-label` on all icon-only buttons and interactive regions
+- `aria-current="page"` on active navigation links
+- `aria-expanded` on mobile nav toggle and transcript accordion
+- `aria-pressed` on the captions toggle button
+- `aria-live="polite"` on dynamically loaded story grids
+- Full transcripts available for all stories via collapsible section
+- HTML5 `<track>` element for video captions (WebVTT)
+- `@media (prefers-reduced-motion)` disables all transitions
+- `.sr-only` utility class for screen-reader-only labels
 
 ---
 
 ## Browser Support
 
 Tested and working in:
+
 - Google Chrome (latest)
 - Mozilla Firefox (latest)
 - Microsoft Edge (latest)
@@ -294,4 +272,3 @@ Tested and working in:
 ---
 
 *StoryCast — Accessible for everyone. | Attorney Valois Niyigaba | June 2026*
-```
