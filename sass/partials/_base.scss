@@ -1,6 +1,11 @@
-// ─── Base & Reset ────────────────────────────────────────────
+// ─── Google Fonts Import ───────────────────────────────────────
+// I imported Playfair Display for headings and Inter for body text.
+// Playfair Display is used for its elegant serif style, while Inter provides a clean, modern sans-serif look.
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600&display=swap');
 
+// ─── Global Reset ─────────────────────────────────────────────
+// I used a CSS reset to ensure consistent styling across browsers.
+// This removes default margins, padding, and sets box-sizing to border-box for all elements.
 *,
 *::before,
 *::after {
@@ -9,11 +14,14 @@
   padding: 0;
 }
 
+// ─── HTML & Body Styles ───────────────────────────────────────
+// I set smooth scrolling for better UX and disabled text size adjustment on iOS for consistency.
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
 
+// I defined global typography, colors, and background using Sass variables for maintainability.
 body {
   font-family: $font-body;
   font-size: $fs-base;
@@ -21,23 +29,31 @@ body {
   line-height: $lh-normal;
   color: $color-text-primary;
   background-color: $color-bg;
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased; // Improves font rendering on WebKit browsers
 }
 
+// ─── Media Elements ───────────────────────────────────────────
+// I ensured images and videos are responsive and block-level by default.
 img, video {
   max-width: 100%;
   display: block;
 }
 
+// ─── Link Styles ──────────────────────────────────────────────
+// I removed default link styling to allow customization.
 a {
   color: inherit;
   text-decoration: none;
 }
 
+// ─── List Styles ─────────────────────────────────────────────
+// I removed default list styling for custom implementations.
 ul, ol {
   list-style: none;
 }
 
+// ─── Button Styles ────────────────────────────────────────────
+// I reset default button styles for consistency and accessibility.
 button {
   cursor: pointer;
   border: none;
@@ -45,14 +61,16 @@ button {
   font-family: inherit;
 }
 
-// Focus visible for keyboard nav
+// ─── Focus Styles for Accessibility ────────────────────────────
+// I added a visible focus state for keyboard navigation to meet WCAG standards.
 :focus-visible {
   outline: 3px solid $color-gold;
   outline-offset: 3px;
   border-radius: $radius-sm;
 }
 
-// Screen reader only utility
+// ─── Screen Reader Utility ─────────────────────────────────────
+// I created a utility class to hide elements visually while keeping them accessible to screen readers.
 .sr-only {
   position: absolute;
   width: 1px;
@@ -65,7 +83,8 @@ button {
   border: 0;
 }
 
-// Skip to main content link
+// ─── Skip Link for Accessibility ───────────────────────────────
+// I added a skip link to allow keyboard users to bypass navigation and jump to main content.
 .skip-link {
   position: absolute;
   top: -100%;
@@ -79,10 +98,12 @@ button {
   transition: top 0.2s;
 
   &:focus {
-    top: $space-4;
+    top: $space-4; // Brings the link into view when focused
   }
 }
 
+// ─── Reduced Motion Support ───────────────────────────────────
+// I added a media query to respect user preferences for reduced motion, improving accessibility.
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
