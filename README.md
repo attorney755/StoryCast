@@ -116,66 +116,13 @@ sass --watch sass/main.scss css/main.css
 
 ---
 
-## Adding Media Files
-
-### Audio (Podcasts)
-
-- **Format:** MP3
-- **Location:** `assets/audio/`
-- **Naming:** `story1.mp3`, `story2.mp3` ... `story6.mp3`
-- **Duration:** Approximately 3-5 minutes each
-
-### Video
-
-- **Format:** MP4
-- **Location:** `assets/video/`
-- **Naming:** `story2.mp4`, `story5.mp4` (video stories only)
-- **Duration:** Approximately 3-5 minutes each
-- **Captions:** VTT files (`story2.vtt`, `story5.vtt`) in `assets/transcripts/`
-
-### Transcripts
-
-- **Format:** Plain text (`.txt`) for display and download
-- **Location:** `assets/transcripts/`
-- **Naming:** `story1.txt`, `story2.txt` ... `story6.txt`
-- **Usage:** Fetched automatically by the story detail page based on story ID
-
-### Captions (Video Only)
-
-- **Format:** WebVTT (`.vtt`) with manual timestamps
-- **Location:** `assets/transcripts/`
-- **Naming:** `story2.vtt`, `story5.vtt`
-- **Usage:** Loaded via HTML5 `<track>` element in the video player
-- **Note:** Timestamps are manually synced to match the audio of each video
-
----
-
 ## Adding or Editing Stories
 
 All story data is centralized in `js/app.js` at the top of the file inside the `STORIES` array. The project uses a single `story/story.html` page that dynamically loads content based on the `?id=` URL parameter.
 
 ### Why JavaScript Was Used
 
-This project was initially intended to be built with only HTML and CSS. However, as the project evolved, JavaScript became necessary to address several technical limitations:
-
-1. **Dynamic Content Loading**
-  - Avoids code duplication by using a single template for all stories.
-  - Centralizes story data in one place for easy updates.
-2. **Story Data Management**
-  - All story content (titles, descriptions, authors, dates, media paths) is stored in the `STORIES` array.
-  - Adding a new story only requires adding one object to the array.
-3. **Transcript Loading**
-  - Each story has a transcript stored as a `.txt` file.
-  - JavaScript's `fetch()` API dynamically loads the correct transcript based on the story ID.
-4. **Consistent Rendering**
-  - The same `createStoryCard()` function renders story cards on both the home page and stories page.
-  - Ensures visual consistency across the site.
-5. **Media Player Logic**
-  - Handles switching between audio and video elements based on story type.
-  - Manages play/pause, progress tracking, and captions toggling.
-6. **Filter Functionality**
-  - The stories page includes a filter system (All, Podcasts, Videos).
-  - JavaScript dynamically shows/hides stories based on the selected filter.
+This project was initially intended to be built with only HTML and CSS. However, to avoid creating individual HTML files for each story, I chose to use JavaScript. This approach allows helped me to dynamically load content, centralize story data, and maintain consistency across the site.
 
 ### Story Object Structure
 
