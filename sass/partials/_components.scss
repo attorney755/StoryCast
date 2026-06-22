@@ -1,0 +1,627 @@
+// ─── Layout Utilities ────────────────────────────────────────
+.container {
+  width: 100%;
+  max-width: $container-max;
+  margin-inline: auto;
+  padding-inline: $space-8;
+
+  @media (max-width: 768px) {
+    padding-inline: $space-6;
+  }
+}
+
+// ─── Navigation ──────────────────────────────────────────────
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: $color-bg;
+  border-bottom: 1px solid $color-border;
+  height: $nav-height;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  &__logo {
+    font-family: $font-display;
+    font-size: $fs-lg;
+    font-weight: $fw-bold;
+    color: $color-green;
+    letter-spacing: -0.02em;
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: $space-8;
+  }
+
+  &__link {
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    color: $color-text-secondary;
+    padding-bottom: $space-1;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+
+    &:hover {
+      color: $color-green;
+    }
+
+    &--active {
+      color: $color-green;
+      border-bottom-color: $color-gold;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+  }
+
+  &__icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: $radius-full;
+    color: $color-text-secondary;
+    transition: background 0.2s, color 0.2s;
+
+    &:hover {
+      background: $color-bg-section;
+      color: $color-green;
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &__signin {
+    padding: $space-2 $space-5;
+    border: 1.5px solid $color-gold;
+    border-radius: $radius-full;
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    color: $color-green;
+    transition: background 0.2s;
+
+    &:hover {
+      background: $color-gold-bg;
+    }
+  }
+
+  // Mobile hamburger
+  &__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: $space-2;
+
+    span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: $color-green;
+      border-radius: 2px;
+      transition: transform 0.2s;
+    }
+
+    @media (max-width: 768px) {
+      display: flex;
+    }
+  }
+
+  @media (max-width: 768px) {
+    &__links {
+      display: none;
+      position: absolute;
+      top: $nav-height;
+      left: 0;
+      right: 0;
+      background: $color-bg;
+      flex-direction: column;
+      padding: $space-6;
+      gap: $space-4;
+      border-bottom: 1px solid $color-border;
+
+      &--open {
+        display: flex;
+      }
+    }
+
+    &__actions {
+      display: none;
+    }
+  }
+}
+
+// ─── Buttons ─────────────────────────────────────────────────
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3 $space-8;
+  border-radius: $radius-full;
+  font-family: $font-body;
+  font-size: $fs-base;
+  font-weight: $fw-medium;
+  transition: all 0.2s;
+  cursor: pointer;
+
+  &--primary {
+    background: $color-gold;
+    color: $color-green;
+    border: 2px solid $color-gold;
+
+    &:hover {
+      background: $color-gold-light;
+      border-color: $color-gold-light;
+    }
+  }
+
+  &--outline {
+    background: transparent;
+    color: $color-green;
+    border: 1.5px solid $color-border-dark;
+
+    &:hover {
+      border-color: $color-green;
+      background: $color-bg-section;
+    }
+  }
+
+  &--sm {
+    padding: $space-2 $space-5;
+    font-size: $fs-sm;
+  }
+}
+
+// ─── Tags / Category Pills ────────────────────────────────────
+.tag {
+  display: inline-block;
+  padding: $space-1 $space-3;
+  border-radius: $radius-full;
+  font-size: $fs-xs;
+  font-weight: $fw-semibold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: $color-gold-bg;
+  color: #8a6a1e;
+  border: 1px solid rgba($color-gold, 0.3);
+}
+
+// ─── Story Cards ─────────────────────────────────────────────
+.story-card {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  border: 1px solid $color-border;
+  box-shadow: $shadow-sm;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-lg;
+  }
+
+  &__image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    background: $color-bg-section;
+  }
+
+  &__image-placeholder {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, $color-bg-section 0%, #e4ede7 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-text-muted;
+    font-size: $fs-sm;
+  }
+
+  &__body {
+    padding: $space-6;
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+    flex: 1;
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-size: $fs-lg;
+    font-weight: $fw-bold;
+    color: $color-green;
+    line-height: $lh-snug;
+  }
+
+  &__desc {
+    font-size: $fs-sm;
+    color: $color-text-secondary;
+    line-height: $lh-normal;
+    flex: 1;
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    color: $color-green;
+    margin-top: auto;
+    transition: gap 0.2s;
+
+    &:hover {
+      gap: $space-3;
+      color: $color-green-mid;
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+// Related story card (sidebar)
+.related-card {
+  display: flex;
+  gap: $space-4;
+  padding: $space-4 0;
+  border-bottom: 1px solid $color-border;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__image {
+    width: 80px;
+    height: 60px;
+    border-radius: $radius-md;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: $color-bg-section;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-1;
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-size: $fs-base;
+    font-weight: $fw-semibold;
+    color: $color-green;
+    line-height: $lh-snug;
+  }
+
+  &__desc {
+    font-size: $fs-xs;
+    color: $color-text-muted;
+    line-height: $lh-normal;
+  }
+}
+
+// ─── Section Headers ──────────────────────────────────────────
+.section-header {
+  margin-bottom: $space-10;
+
+  &__eyebrow {
+    font-size: $fs-xs;
+    font-weight: $fw-semibold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $color-gold;
+    margin-bottom: $space-3;
+    display: block;
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-size: $fs-2xl;
+    font-weight: $fw-bold;
+    color: $color-green;
+    line-height: $lh-tight;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 3px;
+      background: $color-gold;
+      margin-top: $space-4;
+      border-radius: $radius-full;
+    }
+  }
+}
+
+// ─── Footer ───────────────────────────────────────────────────
+.footer {
+  background: $color-green;
+  color: rgba($color-text-light, 0.85);
+  padding: $space-12 0 $space-6;
+
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: $space-10;
+    padding-bottom: $space-10;
+    border-bottom: 1px solid rgba(white, 0.15);
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: $space-8;
+    }
+  }
+
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+  }
+
+  &__logo {
+    font-family: $font-display;
+    font-size: $fs-xl;
+    font-weight: $fw-bold;
+    color: $color-text-light;
+  }
+
+  &__tagline {
+    font-size: $fs-sm;
+    color: rgba($color-text-light, 0.6);
+  }
+
+  &__nav-title {
+    font-size: $fs-xs;
+    font-weight: $fw-semibold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-gold;
+    margin-bottom: $space-4;
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+  }
+
+  &__link {
+    font-size: $fs-sm;
+    color: rgba($color-text-light, 0.7);
+    transition: color 0.2s;
+
+    &:hover {
+      color: $color-text-light;
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: $space-6;
+    flex-wrap: wrap;
+    gap: $space-4;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  &__copy {
+    font-size: $fs-xs;
+    color: rgba($color-text-light, 0.5);
+  }
+
+  &__social {
+    display: flex;
+    gap: $space-3;
+  }
+
+  &__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: $radius-full;
+    border: 1px solid rgba(white, 0.2);
+    color: rgba($color-text-light, 0.7);
+    transition: all 0.2s;
+
+    &:hover {
+      border-color: $color-gold;
+      color: $color-gold;
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+// ─── Mini audio player bar ─────────────────────────────────────
+.now-playing {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: $color-green;
+  border-top: 1px solid rgba(white, 0.15);
+  padding: $space-3 $space-8;
+  display: flex;
+  align-items: center;
+  gap: $space-6;
+
+  @media (max-width: 768px) {
+    padding: $space-3 $space-4;
+    gap: $space-3;
+  }
+
+  &__thumb {
+    width: 44px;
+    height: 44px;
+    border-radius: $radius-md;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: $color-green-mid;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  &__title {
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    color: $color-text-light;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__sub {
+    font-size: $fs-xs;
+    color: rgba($color-text-light, 0.6);
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+    margin-left: auto;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba($color-text-light, 0.8);
+    transition: color 0.2s;
+
+    &:hover {
+      color: $color-text-light;
+    }
+
+    &--play {
+      width: 38px;
+      height: 38px;
+      border-radius: $radius-full;
+      background: $color-gold;
+      color: $color-green;
+
+      &:hover {
+        background: $color-gold-light;
+      }
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &__progress {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    max-width: 400px;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__time {
+    font-size: $fs-xs;
+    color: rgba($color-text-light, 0.6);
+    white-space: nowrap;
+  }
+
+  &__track {
+    flex: 1;
+    appearance: none;
+    height: 3px;
+    border-radius: $radius-full;
+    background: rgba(white, 0.2);
+    cursor: pointer;
+
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: $color-gold;
+    }
+  }
+}
+
+// ─── Filter Buttons ───────────────────────────────────────────
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-3;
+  margin-bottom: $space-12;
+}
+
+.filter-btn {
+  padding: $space-2 $space-5;
+  border-radius: $radius-full;
+  border: 1.5px solid $color-border-dark;
+  background: transparent;
+  font-family: $font-body;
+  font-size: $fs-sm;
+  font-weight: $fw-medium;
+  color: $color-text-secondary;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: $color-green;
+    color: $color-green;
+  }
+
+  &--active {
+    background: $color-green;
+    border-color: $color-green;
+    color: $color-text-light;
+  }
+}
+
+// ─── Story card meta row ──────────────────────────────────────
+.story-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.story-card__duration {
+  font-size: $fs-xs;
+  color: $color-text-muted;
+}

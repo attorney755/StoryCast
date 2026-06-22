@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="StoryCast — Our mission to make storytelling accessible to everyone." />
+  <title>StoryCast — About &amp; Access</title>
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo">StoryCast</a>
+        <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav__links" id="nav-links" role="list">
+          <li><a href="index.html" class="nav__link">Home</a></li>
+          <li><a href="stories.html" class="nav__link">Stories</a></li>
+          <li><a href="about.html" class="nav__link nav__link--active" aria-current="page">About &amp; Access</a></li>
+        </ul>
+        <div class="nav__actions">
+          <a href="#search" class="nav__icon-btn" aria-label="Search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </a>
+          <a href="#signin" class="nav__signin">Sign In</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- Mission Header -->
+    <header class="mission-header" aria-labelledby="mission-heading">
+      <div class="container">
+        <h1 class="mission-header__title" id="mission-heading">Our Mission</h1>
+        <p class="mission-header__tagline">Breaking barriers through the power of voice and vision.</p>
+        <div class="mission-header__divider" aria-hidden="true"></div>
+      </div>
+    </header>
+
+    <!-- Mission Content -->
+    <section class="mission-content" aria-labelledby="mission-body-heading">
+      <div class="container">
+        <div class="mission-content__layout">
+          <div>
+            <h2 class="sr-only" id="mission-body-heading">Mission statement</h2>
+            <p class="mission-content__quote">"Accessibility is not a feature, it's a right."</p>
+            <p class="mission-content__text">
+              At StoryCast, we believe that human stories belong to everyone. Our commitment
+              to accessibility goes beyond compliance — it's about crafting an inclusive
+              digital space where every listener, regardless of ability, can immerse
+              themselves in the world of long-form narrative.
+            </p>
+            <p class="mission-content__text">
+              We strive to pioneer a future where voice and technology unite to remove every
+              obstacle between a story and its audience.
+            </p>
+            <a href="#features" class="mission-content__link">
+              Learn about our standards
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          <div>
+            <img
+              src="assets/images/mission.jpg"
+              alt="A person wearing headphones, eyes closed, deeply engaged in listening"
+              class="mission-content__image"
+              onerror="this.style.background='#D6E6DC';this.style.minHeight='300px';this.style.borderRadius='24px';this.removeAttribute('src')"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accessibility Features -->
+    <section class="access-features" id="features" aria-labelledby="features-heading">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-header__title" id="features-heading">Accessibility Features</h2>
+        </div>
+        <div class="access-features__grid">
+
+          <article class="feature-card" id="captions" aria-labelledby="feat-captions">
+            <div class="feature-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect width="18" height="14" x="3" y="5" rx="2"/><path d="M7 15h4m4 0h2M7 11h2m4 0h4"/></svg>
+            </div>
+            <h3 class="feature-card__title" id="feat-captions">Captions &amp; Transcripts</h3>
+            <p class="feature-card__desc">High-fidelity, synchronized captions for every piece of audio and video content. Full text transcripts always available to download.</p>
+          </article>
+
+          <article class="feature-card" id="keyboard" aria-labelledby="feat-keyboard">
+            <div class="feature-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10"/></svg>
+            </div>
+            <h3 class="feature-card__title" id="feat-keyboard">Keyboard Navigation</h3>
+            <p class="feature-card__desc">Every element on StoryCast is fully reachable via keyboard alone. Visible focus indicators always present so you never lose your place.</p>
+          </article>
+
+          <article class="feature-card" id="screen-reader" aria-labelledby="feat-screen-reader">
+            <div class="feature-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            </div>
+            <h3 class="feature-card__title" id="feat-screen-reader">Screen Reader Support</h3>
+            <p class="feature-card__desc">Semantic HTML5 and ARIA labels optimized for industry-leading screen reading technology, ensuring a rich navigable experience.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" aria-label="Site footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo">StoryCast</a>
+          <p class="footer__tagline">Accessible for everyone.</p>
+        </div>
+        <nav aria-label="Footer navigation">
+          <p class="footer__nav-title">Navigate</p>
+          <ul class="footer__links" role="list">
+            <li><a href="index.html" class="footer__link">Home</a></li>
+            <li><a href="stories.html" class="footer__link">Stories</a></li>
+            <li><a href="about.html" class="footer__link">About &amp; Access</a></li>
+          </ul>
+        </nav>
+        <div>
+          <p class="footer__nav-title">Accessibility</p>
+          <ul class="footer__links" role="list">
+            <li><a href="#captions" class="footer__link">Captions &amp; Transcripts</a></li>
+            <li><a href="#keyboard" class="footer__link">Keyboard Navigation</a></li>
+            <li><a href="#screen-reader" class="footer__link">Screen Reader Support</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; 2026 StoryCast Editorial Media Group. All rights reserved.</p>
+        <div class="footer__social" role="list" aria-label="Social links">
+          <a href="#share" class="footer__social-link" aria-label="Share" role="listitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+          </a>
+          <a href="#rss" class="footer__social-link" aria-label="RSS feed" role="listitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1" fill="currentColor"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
